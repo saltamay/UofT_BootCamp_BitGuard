@@ -97,13 +97,41 @@ const copy = () => {
 
 // Display a meesage to confirm password is copied to clipboard
 const alertCopy = () => {
+
+  const div = document.createElement('div');
+
+  // List of bootstrap classes
+  const cls = ["alert", "alert-dismissible", "fade", "show", "alert-copy"];
+
+  div.classList.add(...cls);
+
+  div.innerHTML = `<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span id="alertClose" aria-hidden="true" class="text-white">&times;</span>
+                  </button>
+                  <span class="pr-5"><i class="fas fa-info-circle pr-2"></i>Password copied</span>`
+
+  
+  document.querySelector('#alert-container').appendChild(div);
+
+  // Add event listener to close alert
+  document.getElementById('alertClose').addEventListener('click', alertClose);
+
+  // let isDisabled = document.getElementById('copyPass').disabled;
+
   // Get the alert element
   const alertMessage = document.querySelector('.alert');
 
-  alertMessage.classList.toggle('alert-copy');
+  // alertMessage.classList.toggle('alert-copy');
 
-  // Disable the copy button
-  document.getElementById('copyPass').disabled = true;
+  // // Disable the copy button
+  // isDisabled = !isDisabled;
+  // document.getElementById('copyPass').disabled = isDisabled;
+
+  // if (alertMessage.classList.contains('alert-copy')) {  
+  //   setTimeout(() => {
+  //     alertClose();
+  //   }, 10000); 
+  // }
 }
 
 // Close alert
@@ -111,7 +139,7 @@ const alertClose = () => {
   document.querySelector('.alert').classList.toggle('alert-copy');
 
   // Activate the copy button
-  document.getElementById('copyPass').disabled = false;
+  // document.getElementById('copyPass').disabled = false;
 } 
 
 /* Load event listeners */
@@ -124,7 +152,6 @@ document.getElementById('defaultCheck4').addEventListener('click', handleCheck);
 document.getElementById('generatePass').addEventListener('click', () => {displayPass(passwordArr)});
 // Add event listener to copy to clipboard button
 document.getElementById('copyPass').addEventListener('click', copy);
-// Add event listener to close alert
-document.getElementById('alertClose').addEventListener('click', alertClose);
+
 
 loadLetters();
