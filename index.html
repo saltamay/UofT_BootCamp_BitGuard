@@ -37,6 +37,48 @@
         </div>
       </nav>
     </div>
+    <section class="pasword-generator-layout">
+      <div class="container password-generator">
+        <h2 class="mt-5 mb-3">Password Generator</h2>
+        <div class="row password-generator-display mt-4">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body bg-light text-center">
+                Password
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row password-generator-body">
+          <div class="password-settings col-12 mt-4">
+            <h6 class="password-settings-title">Length</h6>
+            <div class="password-settings-input">
+              <input type="number" step="1" min="8" max="128" style="width: 100%;" />
+            </div>
+          </div>
+          <div class="password-settings col-12 mt-2">
+            <h6 class="password-settings-title">Minimum Numbers</h6>
+            <div class="password-settings-input">
+              <input type="number" step="1" min="1" max="64" style="width: 100%;" />
+            </div>
+          </div>
+          <div class="password-settings col-12 mt-2">
+            <h6 class="password-settings-title">Minimum Special</h6>
+            <div class="password-settings-input">
+              <input type="number" step="1" min="1" max="32" style="width: 100%;"/>
+            </div>
+          </div>
+        </div>
+        <div class="row btn-controls mt-3">
+          <div class="col-12 mt-2">
+            <button type="button" class="btn btn-block btn-primary">Generate Password</button>
+          </div>
+          <div class="col-12 mt-2">
+            <button type="button" class="btn btn-block btn-secondary" disabled>Copy to Clipboard</button>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <!-- Optional JavaScript -->
