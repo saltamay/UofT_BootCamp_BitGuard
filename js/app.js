@@ -113,33 +113,18 @@ const alertCopy = () => {
   
   document.querySelector('#alert-container').appendChild(div);
 
+  // Delete the alert after 3 seconds
+  setTimeout(() => {
+      div.remove();
+    }, 3000);
+
   // Add event listener to close alert
   document.getElementById('alertClose').addEventListener('click', alertClose);
-
-  // let isDisabled = document.getElementById('copyPass').disabled;
-
-  // Get the alert element
-  const alertMessage = document.querySelector('.alert');
-
-  // alertMessage.classList.toggle('alert-copy');
-
-  // // Disable the copy button
-  // isDisabled = !isDisabled;
-  // document.getElementById('copyPass').disabled = isDisabled;
-
-  // if (alertMessage.classList.contains('alert-copy')) {  
-  //   setTimeout(() => {
-  //     alertClose();
-  //   }, 10000); 
-  // }
 }
 
 // Close alert
 const alertClose = () => {
   document.querySelector('.alert').classList.toggle('alert-copy');
-
-  // Activate the copy button
-  // document.getElementById('copyPass').disabled = false;
 } 
 
 /* Load event listeners */
