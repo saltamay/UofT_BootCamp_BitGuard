@@ -62,7 +62,7 @@
           <div class="password-settings col-12 mt-4">
             <h6 class="password-settings-title">Length</h6>
             <div class="password-settings-input">
-              <input type="number" value="8" step="1" min="8" max="128" style="width: 100%;">
+              <input id="passLength" type="number" value="8" step="1" min="8" max="128" style="width: 100%;">
             </div>
           </div>
           <div class="password-settings col-12 mt-2">
@@ -112,7 +112,7 @@
         <!--Control Buttons-->
         <div class="row btn-controls mt-3">
           <div class="col-12 mt-2">
-            <button type="button" class="btn btn-block btn-primary">Generate Password</button>
+            <button id="generatePass" type="button" class="btn btn-block btn-primary">Generate Password</button>
           </div>
           <div class="col-12 mt-2">
             <button type="button" class="btn btn-block btn-secondary" disabled>Copy to Clipboard</button>
