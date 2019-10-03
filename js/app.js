@@ -91,7 +91,28 @@ const copy = () => {
 
   /* Copy the text inside the text field */
   document.execCommand("copy");
+  // Confirm that password copied
+  alertCopy();
 }
+
+// Display a meesage to confirm password is copied to clipboard
+const alertCopy = () => {
+  // Get the alert element
+  const alertMessage = document.querySelector('.alert');
+
+  alertMessage.classList.toggle('alert-copy');
+
+  // Disable the copy button
+  document.getElementById('copyPass').disabled = true;
+}
+
+// Close alert
+const alertClose = () => {
+  document.querySelector('.alert').classList.toggle('alert-copy');
+
+  // Activate the copy button
+  document.getElementById('copyPass').disabled = false;
+} 
 
 /* Load event listeners */
 // Add event listeners to the option selections
@@ -101,7 +122,9 @@ document.getElementById('defaultCheck3').addEventListener('click', handleCheck);
 document.getElementById('defaultCheck4').addEventListener('click', handleCheck);
 // Add event listener to the password generate button
 document.getElementById('generatePass').addEventListener('click', () => {displayPass(passwordArr)});
-// Add event lister to copy to clipboard button
+// Add event listener to copy to clipboard button
 document.getElementById('copyPass').addEventListener('click', copy);
+// Add event listener to close alert
+document.getElementById('alertClose').addEventListener('click', alertClose);
 
 loadLetters();

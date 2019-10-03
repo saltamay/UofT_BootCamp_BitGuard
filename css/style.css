@@ -7,3 +7,17 @@ footer {
   position: absolute;
   bottom: 0;
 }
+
+.alert {
+  display: none;
+}
+
+.alert-copy {
+  display: block;
+  color: #fff;
+  background-color: #666;
+  position: absolute;
+  top: 100px;
+  right: 15px;;
+  z-index: 1
+}

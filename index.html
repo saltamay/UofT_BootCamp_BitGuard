@@ -13,6 +13,11 @@
   <!--Custom CSS-->
   <link rel="stylesheet" href="./css/style.css" />
 
+  <!--Font Awesome-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+    integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+  <!-- <script src="https://kit.fontawesome.com/7053e21479.js" crossorigin="anonymous"></script> -->
+
   <title>BitGuard - Password Management Solution</title>
 </head>
 
@@ -117,9 +122,15 @@
           <div class="col-12 mt-2">
             <button id="copyPass" type="button" class="btn btn-block btn-secondary" disabled>Copy to Clipboard</button>
           </div>
+          <div class="alert" role="alert">
+            <button type="button" class="btn close pl-5">
+              <span id="alertClose" class="text-white">&times;</span>
+            </button>
+            <span class="pr-5"><i class="fas fa-info-circle pr-2"></i>Password copied</span>
+          </div>
         </div>
-        
-      </div> <!--End of password generator container-->
+      <!--End of password generator container-->
+      </div> 
 
     </section>
 
