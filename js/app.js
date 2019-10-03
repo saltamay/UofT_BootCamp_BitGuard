@@ -74,7 +74,23 @@ const generatePass = (arr) => {
 // Display password
 const displayPass = (arr) => {
   const password = generatePass(arr);
-  document.getElementById('passDisplay').innerHTML = password;
+  document.getElementById('passDisplay').value = password;
+  // Enable copy to clipnoard button
+  document.getElementById('copyPass').disabled = false;
+}
+
+// Copy to clipboard
+const copy = () => {
+  /* Get the text field */
+  const passCopy = document.getElementById("passDisplay");
+
+  /* Select the text field */
+  passCopy.select();
+  passCopy.blur();
+  passCopy.setSelectionRange(0, 99999); /*For mobile devices*/
+
+  /* Copy the text inside the text field */
+  document.execCommand("copy");
 }
 
 /* Load event listeners */
@@ -85,5 +101,7 @@ document.getElementById('defaultCheck3').addEventListener('click', handleCheck);
 document.getElementById('defaultCheck4').addEventListener('click', handleCheck);
 // Add event listener to the password generate button
 document.getElementById('generatePass').addEventListener('click', () => {displayPass(passwordArr)});
+// Add event lister to copy to clipboard button
+document.getElementById('copyPass').addEventListener('click', copy);
 
 loadLetters();

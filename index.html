@@ -50,8 +50,8 @@
         <div class="row password-generator-display mt-4">
           <div class="col-12">
             <div class="card">
-              <div id="passDisplay" class="card-body bg-light text-center">
-                Password
+              <div class="card-body bg-light text-center">
+                <input id="passDisplay" type="text" value="Password" class="bg-light text-center" style="border: 0">
               </div>
             </div>
           </div>
@@ -115,7 +115,7 @@
             <button id="generatePass" type="button" class="btn btn-block btn-primary">Generate Password</button>
           </div>
           <div class="col-12 mt-2">
-            <button type="button" class="btn btn-block btn-secondary" disabled>Copy to Clipboard</button>
+            <button id="copyPass" type="button" class="btn btn-block btn-secondary" disabled>Copy to Clipboard</button>
           </div>
         </div>
         
