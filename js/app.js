@@ -6,7 +6,6 @@ const specialChars = [33, 35, 36, 37, 38, 42, 64, 94];
 const numbers = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57];
 // DOM elements
 
-
 /* Utility Functions */
 // Load the password array with ASCII codes for A-Z and a-z
 const loadLetters = () => {
@@ -60,6 +59,7 @@ const createRandChar = (arr) => {
   return String.fromCharCode(arr[randIndex]);
 }
 
+// Generate password
 const generatePass = (arr) => {
   const passLength = document.getElementById('passLength').value;
   let password = "";
@@ -71,6 +71,12 @@ const generatePass = (arr) => {
   return password;
 }
 
+// Display password
+const displayPass = (arr) => {
+  const password = generatePass(arr);
+  document.getElementById('passDisplay').innerHTML = password;
+}
+
 /* Load event listeners */
 // Add event listeners to the option selections
 document.getElementById('defaultCheck1').addEventListener('click', handleCheck);
@@ -78,6 +84,6 @@ document.getElementById('defaultCheck2').addEventListener('click', handleCheck);
 document.getElementById('defaultCheck3').addEventListener('click', handleCheck);
 document.getElementById('defaultCheck4').addEventListener('click', handleCheck);
 // Add event listener to the password generate button
-document.getElementById('generatePass').addEventListener('click', () => {generatePass(passwordArr, passLength)});
+document.getElementById('generatePass').addEventListener('click', () => {displayPass(passwordArr)});
 
 loadLetters();
