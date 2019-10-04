@@ -119,13 +119,29 @@ const alertCopy = () => {
     }, 3000);
 
   // Add event listener to close alert
-  document.getElementById('alertClose').addEventListener('click', alertClose);
+  // document.getElementById('alertClose').addEventListener('click', alertClose);
 }
 
 // Close alert
 const alertClose = () => {
   document.querySelector('.alert').classList.toggle('alert-copy');
-} 
+}
+
+// const displayModalPass = () => {
+  
+//   const div = document.createElement('div');
+  
+//   div.classList.add('form-group', 'row');
+
+//   div.innerHTML = `<div class="row password-generator-settings">
+//                      <div class="password-settings col-12 mt-4">
+//                        <h6 class="password-settings-title">Length</h6>
+//                        <div class="password-settings-input">
+//                          <input id="passLength" type="number" value="8" step="1" min="8" max="128" style="width: 100%;">
+//                          </div>
+//                      </div>
+//                    </div>`
+// }
 
 /* Load event listeners */
 // Add event listeners to the option selections
@@ -140,3 +156,4 @@ document.getElementById('copyPass').addEventListener('click', copy);
 
 
 loadLetters();
+
