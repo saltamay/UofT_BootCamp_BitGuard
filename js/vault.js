@@ -128,8 +128,27 @@ const savePassword = () => {
 
   $('#exampleModal').modal('toggle');
 
+  addPassToList(passLog);
+
   return passLog;
 }
+
+const addPassToList = (passLog) => {
+
+  const li = document.createElement('li');
+  
+  li.classList.add('list-group-item', 'p-0', 'border-0');
+
+  li.innerHTML = `<div class="card border-left-0 border-right-0 rounded-0 " style="width: 100%;">
+                    <div class="card-body p-2">
+                      <a href="${passLog.url}" class="card-link">${passLog.name}</a>
+                      <p class="card-text">${passLog.userName}</p>
+                    </div>
+                  </div>`;
+
+  document.querySelector('.password-list').appendChild(li);
+}
+
 
 const displayPassList = () => {
 

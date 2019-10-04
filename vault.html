@@ -60,11 +60,13 @@
         </aside>
       <!--Section for Vault-->
         <section class="vault-section col-8 mt-3">
-          <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
+          <div class="card vault-header">
+            <div class="card-header header-container d-flex justify-content-between align-items-center">
               <span>My Vault</span> 
               <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><i class="fas fa-plus pr-2"></i>Add Item</button>              
             </div>
+          </div>
+          <div class="vault-body">
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
               aria-hidden="true">
@@ -127,7 +129,7 @@
                 </div>
               </div>
             </div>
-            <ul class="password-list list-group list-group-flush">
+            <ul class="password-list list-group border-0 pl-0 mt-3">
               <!-- <li class="list-group-item">Pass1</li>
               <li class="list-group-item">Pass2</li>
               <li class="list-group-item">Pass2</li> -->
