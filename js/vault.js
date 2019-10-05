@@ -121,9 +121,15 @@ const savePassword = () => {
     url,
     password
   }
-
+  // Close the modal
   $('#exampleModal').modal('toggle');
-  
+
+  // Clear modal input fields
+  document.getElementById('passName').value = "";
+  document.getElementById('userName').value = "";
+  document.getElementById('url').value = "";
+  document.getElementById('modalPassword').value = "";
+
   displayNewList(passLog);
   addToLocalStorage(passLog);
   displayPassList();
@@ -198,13 +204,12 @@ const addToLocalStorage = (password) => {
 
 const displayPassList = () => {
 
-
   let passArr = JSON.parse(localStorage.getItem('passwords'));
 
   if (passArr === null) {
     
     const div = document.createElement('div');
-    div.innerHTML = '<h5 class="empty-list text-center">Your vault is empty</h5>'
+    div.innerHTML = '<h5 class="empty-list text-center mt-3">Your vault is empty</h5>'
     document.querySelector('.vault-section').appendChild(div);
 
   } else {
