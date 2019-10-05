@@ -34,7 +34,7 @@ footer {
 
 /* Custom Responsive Design */
 
-@media (min-width: 768px) and (max-width: 920px) {
+@media (min-width: 768px) {
 .container {
     max-width: 95%;
 }

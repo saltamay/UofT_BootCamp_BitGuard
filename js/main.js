@@ -117,9 +117,6 @@ const alertCopy = () => {
   setTimeout(() => {
       div.remove();
     }, 3000);
-
-  // Add event listener to close alert
-  // document.getElementById('alertClose').addEventListener('click', alertClose);
 }
 
 // Close alert

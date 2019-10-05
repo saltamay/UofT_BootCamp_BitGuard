@@ -2,11 +2,12 @@
 const newListArr = [];
 
 const defaultLength = 12;
-let passwordArr = [];
 let capitalLetters = [];
 let smallLetters = [];
 const specialChars = [33, 35, 36, 37, 38, 42, 64, 94];
 const numbers = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57];
+let passwordArr = [...specialChars, ...numbers];
+
 
 /* Utility Functions */
 // Load the password array with ASCII codes for A-Z and a-z
@@ -20,8 +21,8 @@ const loadLetters = () => {
     smallLetters.push(i);
   }
   // Push the default codes to the password arr
-  passwordArr = [...capitalLetters, ...smallLetters];
-  // console.log(passwordArr);
+  passwordArr = [...capitalLetters, ...smallLetters, ...passwordArr];
+  console.log(passwordArr);
 }
 
 // Creates random character from an arr that holds ASCII codes 
@@ -160,6 +161,12 @@ const addToList = (password) => {
 }
 
 const displayNewList = (password) => {
+
+  if (newListArr.length !== 0) {
+    while (document.querySelector('.new.password-list').hasChildNodes()) {
+      document.querySelector('.new.password-list').firstChild.remove();
+    }
+  }
   
   newListArr.push(password);
 
@@ -170,10 +177,10 @@ const displayNewList = (password) => {
 
     li.classList.add('list-group-item', 'p-0', 'border-0');
 
-    li.innerHTML = `<div class="card border-left-0 border-right-0 rounded-0 " style="width: 100%;">
+    li.innerHTML = `<div class="card border-left-0 border-right-0 rounded-0 mt-3" style="width: 100%;">
                     <div class="card-body p-2">
-                      <a href="${password.url}" class="card-link">${password.name}</a>
-                      <p class="card-text">${password.userName}</p>
+                      <a href="${element.url}" class="card-link">${element.name}</a>
+                      <p class="card-text">${element.userName}</p>
                     </div>
                   </div>`;
 
