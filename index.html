@@ -53,9 +53,10 @@
         <!--Alert Container-->
         <div id="alert-container"></div>
         <!--Password Display-->
-        <h2 class="title mt-4 mb-4">Password Generator<input id="passOutput" type="text" value="" class="text-white"></h2>
-        <div class="row password-generator-display mt-4">
-          <div class="col-12">
+        
+        <div class="row password-generator-display">
+          <div class="col-12 offset-md-2 col-md-8">
+            <h2 class="title mt-3 mb-2">Password Generator<input id="passOutput" type="text" value="" class="text-white"></h2>
             <div class="card">
               <div class="card-body bg-light text-center">
                 <span id="passDisplay" class="bg-light text-center">Password</span>
@@ -66,19 +67,19 @@
 
         <!--Password generator settings-->
         <div class="row password-generator-settings">
-          <div class="password-settings col-12 mt-4">
+          <div class="password-settings col-12 mt-4 offset-md-2 col-md-8">
             <h6 class="password-settings-title">Length</h6>
             <div class="password-settings-input">
               <input id="passLength" type="number" value="8" step="1" min="8" max="128" style="width: 100%;">
             </div>
           </div>
-          <div class="password-settings col-12 mt-2">
+          <div class="password-settings col-12 mt-2 offset-md-2 col-md-8">
             <h6 class="password-settings-title">Minimum Numbers</h6>
             <div class="password-settings-input">
               <input id="inputNumber" type="number" value="1" step="1" min="1" max="128" style="width: 100%;" disabled>
             </div>
           </div>
-          <div class="password-settings col-12 mt-2">
+          <div class="password-settings col-12 mt-2 offset-md-2 col-md-8">
             <h6 class="password-settings-title">Minimum Special</h6>
             <div class="password-settings-input">
               <input id="inputSpecial" type="number" value="1" step="1" min="1" max="128" style="width: 100%;" disabled>
@@ -88,13 +89,13 @@
 
         <!--Password generator options-->
         <div class="row form-check-options mt-3 pl-3">
-          <div class="form-check col-6">
+          <div class="form-check col-6 offset-md-2 col-md-4">
             <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked>
             <label class="form-check-label" for="defaultCheck1">
               A-Z
             </label>
           </div>
-          <div class="form-check col-6">
+          <div class="form-check col-6 offset-md-2 col-md-4">
             <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" checked>
             <label class="form-check-label" for="defaultCheck2">
               a-z
@@ -102,13 +103,13 @@
           </div>
         </div>
         <div class="row form-check-options mt-3 pl-3">
-          <div class="form-check col-6">
+          <div class="form-check col-6 offset-md-2 col-md-4">
             <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
             <label class="form-check-label" for="defaultCheck3">
               0-9
             </label>
           </div>
-          <div class="form-check col-6">
+          <div class="form-check col-6 offset-md-2 col-md-4">
             <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
             <label class="form-check-label" for="defaultCheck4">
               !@#$%^&*
@@ -118,10 +119,10 @@
 
         <!--Control Buttons-->
         <div class="row btn-controls mt-3">
-          <div class="col-12 mt-2">
+          <div class="col-12 mt-2 offset-md-2 col-md-8">
             <button id="generatePass" type="button" class="btn btn-block btn-primary">Generate Password</button>
           </div>
-          <div class="col-12 mt-2">
+          <div class="col-12 mt-2 offset-md-2 col-md-8">
             <button id="copyPass" type="button" class="btn btn-block btn-secondary" disabled>Copy to Clipboard</button>
           </div>
           <div class="alert" role="alert">
