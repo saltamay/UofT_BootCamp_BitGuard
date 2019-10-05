@@ -1,4 +1,6 @@
-/* Global VAriables */
+/* Global Variables */
+const newListArr = [];
+
 const defaultLength = 12;
 let passwordArr = [];
 let capitalLetters = [];
@@ -124,16 +126,24 @@ const savePassword = () => {
     password
   }
 
-  console.log(passLog);
+  // console.log(passLog);
 
   $('#exampleModal').modal('toggle');
-
-  addPassToList(passLog);
+  
+  displayNewList(passLog);
+  addToLocalStorage(passLog);
+  displayPassList();
 
   return passLog;
 }
 
-const addPassToList = (passLog) => {
+const addToList = (password) => {
+
+  const emptyMessage = document.querySelector('.empty-list');
+
+  if (emptyMessage) {
+    emptyMessage.remove();
+  }
 
   const li = document.createElement('li');
   
@@ -141,27 +151,93 @@ const addPassToList = (passLog) => {
 
   li.innerHTML = `<div class="card border-left-0 border-right-0 rounded-0 " style="width: 100%;">
                     <div class="card-body p-2">
-                      <a href="${passLog.url}" class="card-link">${passLog.name}</a>
-                      <p class="card-text">${passLog.userName}</p>
+                      <a href="${password.url}" class="card-link">${password.name}</a>
+                      <p class="card-text">${password.userName}</p>
                     </div>
                   </div>`;
 
-  document.querySelector('.password-list').appendChild(li);
+  document.querySelectorAll('.password-list')[1].appendChild(li);
 }
 
+const displayNewList = (password) => {
+  
+  newListArr.push(password);
+
+  const sortedArr = sortByName(newListArr);
+
+  sortedArr.forEach(element => {
+    const li = document.createElement('li');
+
+    li.classList.add('list-group-item', 'p-0', 'border-0');
+
+    li.innerHTML = `<div class="card border-left-0 border-right-0 rounded-0 " style="width: 100%;">
+                    <div class="card-body p-2">
+                      <a href="${password.url}" class="card-link">${password.name}</a>
+                      <p class="card-text">${password.userName}</p>
+                    </div>
+                  </div>`;
+
+    document.querySelector('.new.password-list').appendChild(li);
+    
+  });
+  document.querySelector('.new-list').style.display = 'block';
+}
+
+const addToLocalStorage = (password) => {
+
+  let passArr = JSON.parse(localStorage.getItem('passwords'));
+  
+  if (passArr) {
+    passArr.push(password);
+  } else {
+    passArr = [];
+    passArr.push(password);
+  }
+
+  localStorage.setItem('passwords', JSON.stringify(passArr));
+
+}
+
+// Sort an array of objects by name property
+const sortByName = (arr) => {
+  arr.sort((a, b) => {
+    const nameA = a.name.toLowerCase();
+    const nameB = b.name.toLowerCase();
+    if (nameA < nameB)
+      return -1
+    if (nameA > nameB)
+      return 1
+    return 0
+  });
+
+  return arr;
+}
 
 const displayPassList = () => {
 
-  const passList = document.querySelector('.password-list li');
+  // const passList = document.querySelector('.password-list li');
 
-  console.log(passList);
+  let passArr = JSON.parse(localStorage.getItem('passwords'));
 
-  if (passList === null) {
+  console.log(passArr);
+
+  if (passArr === null) {
+    
     const div = document.createElement('div');
-
-    div.innerHTML = '<h5 class="mt-5 text-center">Your vault is empty</h5>'
-
+    div.innerHTML = '<h5 class="empty-list mt-5 text-center">Your vault is empty</h5>'
     document.querySelector('.vault-section').appendChild(div);
+
+  } else {
+    while (document.querySelectorAll('.password-list')[1].hasChildNodes()) {
+      document.querySelectorAll('.password-list')[1].firstChild.remove();
+    }
+    // Sort passwords by passwords name
+    passArr = sortByName(passArr);
+    // Loop through the passwords array and display them as list items
+    passArr.forEach(element => {
+      // console.log(typeof element);
+      addToList(element);
+    });
   }
 }
 

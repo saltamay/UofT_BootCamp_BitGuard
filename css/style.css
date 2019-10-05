@@ -28,6 +28,14 @@ footer {
   background-color: #666;  
 }
 
-/* .modal-dialog {
-  max-width: 768px;
-} */
+.new-list {
+  display: none;
+}
+
+/* Custom Responsive Design */
+
+@media (min-width: 768px) and (max-width: 920px) {
+.container {
+    max-width: 95%;
+}
+}
