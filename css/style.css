@@ -8,6 +8,16 @@ footer {
   bottom: 0;
 }
 
+#passOutput {
+  border: 0;
+}
+
+#passInput {
+  z-index: 1;
+}
+
+
+
 #alert-container {
   display: flex;
   flex-direction: column;

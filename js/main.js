@@ -73,6 +73,7 @@ const generatePass = (arr) => {
 const displayPass = (arr) => {
   const password = generatePass(arr);
   document.getElementById('passDisplay').innerHTML = password;
+  document.getElementById('passOutput').value = password;
   // Enable copy to clipnoard button
   document.getElementById('copyPass').disabled = false;
 }
@@ -80,7 +81,7 @@ const displayPass = (arr) => {
 // Copy to clipboard
 const copy = () => {
   /* Get the text field */
-  const passCopy = document.getElementById("passDisplay");
+  const passCopy = document.getElementById("passOutput");
 
   /* Select the text field */
   passCopy.select();
