@@ -17,7 +17,21 @@ footer {
   z-index: 1;
 }
 
+.star {
+  color: #666;
+  font-size: 20px;
+}
 
+.star:hover,
+#createPass:hover,
+#togglePassword:hover,
+#copyPassword:hover {
+  cursor: pointer;
+}
+
+.favorite {
+  color: gold;
+}
 
 #alert-container {
   display: flex;

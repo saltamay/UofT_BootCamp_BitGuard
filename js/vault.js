@@ -7,6 +7,7 @@ let smallLetters = [];
 const specialChars = [33, 35, 36, 37, 38, 42, 64, 94];
 const numbers = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57];
 let passwordArr = [...specialChars, ...numbers];
+let isStarClicked = false;
 
 
 /* Utility Functions */
@@ -115,11 +116,18 @@ const savePassword = () => {
   const url = document.getElementById('url').value;
   const password = document.getElementById('modalPassword').value;
 
+  let starClicked = isStarClicked;
+
+  if (document.querySelector('.star').classList.contains('favorite')) {
+    starClicked = !isStarClicked;
+  }
+
   const passLog = {
     name,
     userName,
     url,
-    password
+    password,
+    starClicked
   }
   // Close the modal
   $('#exampleModal').modal('toggle');
@@ -136,6 +144,40 @@ const savePassword = () => {
 
 }
 
+const createListItem = (password) => {
+  
+  const li = document.createElement('li');
+  const spanStar = document.createElement('span');
+  const spanTrash = document.createElement('span');
+
+  console.log(password['starClicked']);
+  if (password['starClicked']) {
+    spanStar.innerHTML = `<i class="star favorite fas fa-star pt-3 pl-2"></i>`;
+  } else {
+    spanStar.innerHTML = `<i class="star fas fa-star pt-3 pl-2"></i>`;
+  }
+
+  spanTrash.innerHTML = `<i class="fas fa-trash-alt"></i>`;
+
+  spanStar.addEventListener('click', function(e){toggleFavorite(e)});
+  // spanTrash.addEventListener('click', deleteListItem);
+
+  li.classList.add('list-group-item', 'p-0', 'border-0');
+
+  li.innerHTML = `<div class="card border-left-0 border-right-0 rounded-0 " style="width: 100%;">
+                    <div class="card-body p-2 d-flex justify-content-between">
+                      <a href="${password.url}" class="card-link">${password.name}</a>
+                      <p class="card-text">${password.userName}</p>
+                      <div>
+                        ${spanStar.innerHTML}
+                        ${spanTrash.innerHTML}
+                      </div>
+                    </div>
+                  </div>`;
+
+  document.querySelectorAll('.password-list')[1].appendChild(li);
+}
+
 const addToList = (password) => {
 
   const emptyMessage = document.querySelector('.empty-list');
@@ -143,19 +185,8 @@ const addToList = (password) => {
   if (emptyMessage) {
     emptyMessage.remove();
   }
-
-  const li = document.createElement('li');
-  
-  li.classList.add('list-group-item', 'p-0', 'border-0');
-
-  li.innerHTML = `<div class="card border-left-0 border-right-0 rounded-0 " style="width: 100%;">
-                    <div class="card-body p-2">
-                      <a href="${password.url}" class="card-link">${password.name}</a>
-                      <p class="card-text">${password.userName}</p>
-                    </div>
-                  </div>`;
-
-  document.querySelectorAll('.password-list')[1].appendChild(li);
+  console.log(password['starClicked']);
+  createListItem(password);
 }
 
 const displayNewList = (password) => {
@@ -225,6 +256,13 @@ const displayPassList = () => {
   }
 }
 
+const toggleFavorite = (e) => {  
+  // let star = document.querySelector('.star');
+
+  e.target.classList.toggle('favorite');
+  // star.classList.add('star', 'fas', 'fa-star');
+}
+
 // Sort an array of objects by name property
 const sortByName = (arr) => {
   arr.sort((a, b) => {
@@ -246,6 +284,7 @@ document.getElementById('createPass').addEventListener('click', () => { displayP
 document.getElementById('togglePassword').addEventListener('click', togglePassword);
 document.getElementById('copyPassword').addEventListener('click', copy);
 document.getElementById('save').addEventListener('click', savePassword);
+document.querySelector('.star').addEventListener('click', function(e){toggleFavorite(e)});
 
 
 displayPassList();
