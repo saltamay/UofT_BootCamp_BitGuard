@@ -169,7 +169,7 @@ const displayNewList = (password) => {
 
     li.classList.add('list-group-item', 'p-0', 'border-0');
 
-    li.innerHTML = `<div class="card border-left-0 border-right-0 rounded-0 mt-3" style="width: 100%;">
+    li.innerHTML = `<div class="card border-left-0 border-right-0 rounded-0" style="width: 100%;">
                     <div class="card-body p-2">
                       <a href="${element.url}" class="card-link">${element.name}</a>
                       <p class="card-text">${element.userName}</p>
@@ -204,7 +204,7 @@ const displayPassList = () => {
   if (passArr === null) {
     
     const div = document.createElement('div');
-    div.innerHTML = '<h5 class="empty-list mt-5 text-center">Your vault is empty</h5>'
+    div.innerHTML = '<h5 class="empty-list text-center">Your vault is empty</h5>'
     document.querySelector('.vault-section').appendChild(div);
 
   } else {

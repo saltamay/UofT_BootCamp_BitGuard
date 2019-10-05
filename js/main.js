@@ -72,7 +72,7 @@ const generatePass = (arr) => {
 // Display password
 const displayPass = (arr) => {
   const password = generatePass(arr);
-  document.getElementById('passDisplay').value = password;
+  document.getElementById('passDisplay').innerHTML = password;
   // Enable copy to clipnoard button
   document.getElementById('copyPass').disabled = false;
 }
