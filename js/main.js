@@ -19,7 +19,6 @@ const loadLetters = () => {
   }
   // Push the default codes to the password arr
   passwordArr = [...capitalLetters, ...smallLetters];
-  // console.log(passwordArr);
 }
 
 // Add or remove optional char codes from the password array
@@ -67,7 +66,6 @@ const generatePass = (arr) => {
     const char = createRandChar(arr);
     password += char;    
   }
-  console.log(password);
   return password;
 }
 
@@ -117,7 +115,7 @@ const alertCopy = () => {
   setTimeout(() => {
       div.remove();
     }, 3000);
-}
+  }
 
 // Close alert
 const alertClose = () => {

@@ -1,6 +1,6 @@
 /* Global Variables */
 const newListArr = [];
-
+// Default length for the password
 const defaultLength = 12;
 let capitalLetters = [];
 let smallLetters = [];
@@ -22,13 +22,11 @@ const loadLetters = () => {
   }
   // Push the default codes to the password arr
   passwordArr = [...capitalLetters, ...smallLetters, ...passwordArr];
-  console.log(passwordArr);
 }
 
 // Creates random character from an arr that holds ASCII codes 
 const createRandChar = (arr) => {
   const randIndex = Math.floor(Math.random() * arr.length);
-
   return String.fromCharCode(arr[randIndex]);
 }
 
@@ -40,14 +38,11 @@ const generatePass = (arr) => {
     const char = createRandChar(arr);
     password += char;
   }
-  console.log(password);
   return password;
 }
 
 const displayPassword = (arr) => {
-  
   const password = generatePass(arr);
-
   document.getElementById('modalPassword').value = password;
 }
 
@@ -56,7 +51,7 @@ const togglePassword = () => {
   const passInput = document.getElementById('modalPassword');
   
   if (passInput.type === 'password') {
-    
+    // Make the password visible
     passInput.type = 'text';
 
     const eyeIcon = document.querySelector('.fa-eye');
@@ -64,7 +59,7 @@ const togglePassword = () => {
     eyeIcon.classList.add('fa-eye-slash');
 
   } else {
-    
+    // Hide the password
     passInput.type = 'password';
 
     const eyeIcon = document.querySelector('.fa-eye-slash');
@@ -127,15 +122,12 @@ const savePassword = () => {
     password
   }
 
-  // console.log(passLog);
-
   $('#exampleModal').modal('toggle');
   
   displayNewList(passLog);
   addToLocalStorage(passLog);
   displayPassList();
 
-  return passLog;
 }
 
 const addToList = (password) => {
@@ -202,31 +194,12 @@ const addToLocalStorage = (password) => {
   }
 
   localStorage.setItem('passwords', JSON.stringify(passArr));
-
-}
-
-// Sort an array of objects by name property
-const sortByName = (arr) => {
-  arr.sort((a, b) => {
-    const nameA = a.name.toLowerCase();
-    const nameB = b.name.toLowerCase();
-    if (nameA < nameB)
-      return -1
-    if (nameA > nameB)
-      return 1
-    return 0
-  });
-
-  return arr;
 }
 
 const displayPassList = () => {
 
-  // const passList = document.querySelector('.password-list li');
 
   let passArr = JSON.parse(localStorage.getItem('passwords'));
-
-  console.log(passArr);
 
   if (passArr === null) {
     
@@ -242,10 +215,24 @@ const displayPassList = () => {
     passArr = sortByName(passArr);
     // Loop through the passwords array and display them as list items
     passArr.forEach(element => {
-      // console.log(typeof element);
       addToList(element);
     });
   }
+}
+
+// Sort an array of objects by name property
+const sortByName = (arr) => {
+  arr.sort((a, b) => {
+    const nameA = a.name.toLowerCase();
+    const nameB = b.name.toLowerCase();
+    if (nameA < nameB)
+      return -1
+    if (nameA > nameB)
+      return 1
+    return 0
+  });
+
+  return arr;
 }
 
 
