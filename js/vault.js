@@ -144,23 +144,45 @@ const savePassword = () => {
 
 }
 
-const createListItem = (password) => {
+function toggleFavorite(e) {
+  e.target.classList.toggle('favorite');
+}
+
+const stopEvent = (e) => {
+  e.stopPropagation();
+  e.target.classList.toggle('favorite');
+}
+
+const createListItem = (password, list) => {
   
   const li = document.createElement('li');
   const spanStar = document.createElement('span');
   const spanTrash = document.createElement('span');
+  const div = document.createElement('div');
+  const iconContainer = document.createElement('div');
 
-  console.log(password['starClicked']);
+
+  // console.log(password['starClicked']);
   if (password['starClicked']) {
     spanStar.innerHTML = `<i class="star favorite fas fa-star pt-3 pl-2"></i>`;
   } else {
     spanStar.innerHTML = `<i class="star fas fa-star pt-3 pl-2"></i>`;
   }
 
-  spanTrash.innerHTML = `<i class="fas fa-trash-alt"></i>`;
+  spanTrash.innerHTML = `<i class="fas fa-trash-alt"></i>`;  
 
-  spanStar.addEventListener('click', function(e){toggleFavorite(e)});
-  // spanTrash.addEventListener('click', deleteListItem);
+  iconContainer.appendChild(spanStar);
+  iconContainer.appendChild(spanTrash);
+  div.appendChild(iconContainer);
+
+  
+  li.addEventListener('click', function(e) {
+    if (e.target.classList.contains('fa-star')) {
+      toggleFavorite(e);
+      displayPassList({});
+      displayNewList({});
+    }
+  });
 
   li.classList.add('list-group-item', 'p-0', 'border-0');
 
@@ -168,25 +190,11 @@ const createListItem = (password) => {
                     <div class="card-body p-2 d-flex justify-content-between">
                       <a href="${password.url}" class="card-link">${password.name}</a>
                       <p class="card-text">${password.userName}</p>
-                      <div>
-                        ${spanStar.innerHTML}
-                        ${spanTrash.innerHTML}
-                      </div>
+                      ${div.innerHTML}
                     </div>
                   </div>`;
 
-  document.querySelectorAll('.password-list')[1].appendChild(li);
-}
-
-const addToList = (password) => {
-
-  const emptyMessage = document.querySelector('.empty-list');
-
-  if (emptyMessage) {
-    emptyMessage.remove();
-  }
-  console.log(password['starClicked']);
-  createListItem(password);
+  document.querySelector(list).appendChild(li);
 }
 
 const displayNewList = (password) => {
@@ -201,20 +209,8 @@ const displayNewList = (password) => {
 
   const sortedArr = sortByName(newListArr);
 
-  sortedArr.forEach(element => {
-    const li = document.createElement('li');
-
-    li.classList.add('list-group-item', 'p-0', 'border-0');
-
-    li.innerHTML = `<div class="card border-left-0 border-right-0 rounded-0" style="width: 100%;">
-                    <div class="card-body p-2">
-                      <a href="${element.url}" class="card-link">${element.name}</a>
-                      <p class="card-text">${element.userName}</p>
-                    </div>
-                  </div>`;
-
-    document.querySelector('.new.password-list').appendChild(li);
-    
+  sortedArr.forEach(password => {
+    createListItem(password, '.new.password-list')
   });
   document.querySelector('.new-list').style.display = 'block';
 }
@@ -244,6 +240,12 @@ const displayPassList = () => {
     document.querySelector('.vault-section').appendChild(div);
 
   } else {
+    const emptyMessage = document.querySelector('.empty-list');
+    
+    if (emptyMessage) {
+      emptyMessage.remove();
+    }
+
     while (document.querySelectorAll('.password-list')[1].hasChildNodes()) {
       document.querySelectorAll('.password-list')[1].firstChild.remove();
     }
@@ -251,16 +253,9 @@ const displayPassList = () => {
     passArr = sortByName(passArr);
     // Loop through the passwords array and display them as list items
     passArr.forEach(element => {
-      addToList(element);
+      createListItem(element, '.existing.password-list');
     });
   }
-}
-
-const toggleFavorite = (e) => {  
-  // let star = document.querySelector('.star');
-
-  e.target.classList.toggle('favorite');
-  // star.classList.add('star', 'fas', 'fa-star');
 }
 
 // Sort an array of objects by name property
