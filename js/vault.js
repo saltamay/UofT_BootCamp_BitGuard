@@ -39,14 +39,10 @@ const generatePass = (arr) => {
     const char = createRandChar(arr);
     password += char;
   }
-  return password;
-}
-
-const displayPassword = (arr) => {
-  const password = generatePass(arr);
   document.getElementById('modalPassword').value = password;
 }
 
+// Eye icon toggles the password making it visible/not visible 
 const togglePassword = () => {
 
   const passInput = document.getElementById('modalPassword');
@@ -109,6 +105,21 @@ const alertCopy = () => {
   }, 3000);
 }
 
+// Save new password item to local storage
+const addToLocalStorage = (password) => {
+
+  let passArr = JSON.parse(localStorage.getItem('passwords'));
+
+  if (passArr) {
+    passArr.push(password);
+  } else {
+    passArr = [];
+    passArr.push(password);
+  }
+
+  localStorage.setItem('passwords', JSON.stringify(passArr));
+}
+
 const savePassword = () => {
 
   const name = document.getElementById('passName').value;
@@ -122,6 +133,9 @@ const savePassword = () => {
     starClicked = !isStarClicked;
   }
 
+  console.log(starClicked);
+  console.log(isStarClicked);
+
   const passLog = {
     name,
     userName,
@@ -129,6 +143,11 @@ const savePassword = () => {
     password,
     starClicked
   }
+
+  console.log(passLog);
+
+  addToLocalStorage(passLog);
+
   // Close the modal
   $('#exampleModal').modal('toggle');
 
@@ -137,20 +156,29 @@ const savePassword = () => {
   document.getElementById('userName').value = "";
   document.getElementById('url').value = "";
   document.getElementById('modalPassword').value = "";
+  document.querySelector('.star').classList.remove('favorite');
 
-  displayNewList(passLog);
-  addToLocalStorage(passLog);
-  displayPassList();
 
+  displayPassList(passLog);
 }
 
-function toggleFavorite(e) {
+const toggleFavorite = (e) => {
+  let name = e.target.parentNode.parentNode.parentNode.firstElementChild.innerHTML;
+  console.log(name);
   e.target.classList.toggle('favorite');
-}
-
-const stopEvent = (e) => {
-  e.stopPropagation();
-  e.target.classList.toggle('favorite');
+  // Get the items on local storage to update favorite state
+  const newStateArr = JSON.parse(localStorage.getItem('passwords'));
+  console.log(newStateArr);
+  // Set the state to opposite of itself
+  for (let index = 0; index < newStateArr.length; index++) {
+    if(newStateArr[index].name === name) {
+      newStateArr[index].starClicked = !newStateArr[index].starClicked;
+      break;
+    }  
+  }
+  console.log(newStateArr);
+  // Rewrite the local storage
+  localStorage.setItem('passwords', JSON.stringify(newStateArr));
 }
 
 const createListItem = (password, list) => {
@@ -161,8 +189,6 @@ const createListItem = (password, list) => {
   const div = document.createElement('div');
   const iconContainer = document.createElement('div');
 
-
-  // console.log(password['starClicked']);
   if (password['starClicked']) {
     spanStar.innerHTML = `<i class="star favorite fas fa-star pt-3 pl-2"></i>`;
   } else {
@@ -179,8 +205,6 @@ const createListItem = (password, list) => {
   li.addEventListener('click', function(e) {
     if (e.target.classList.contains('fa-star')) {
       toggleFavorite(e);
-      displayPassList({});
-      displayNewList({});
     }
   });
 
@@ -197,37 +221,23 @@ const createListItem = (password, list) => {
   document.querySelector(list).appendChild(li);
 }
 
-const displayNewList = (password) => {
+// const displayNewList = (password) => {
 
-  if (newListArr.length !== 0) {
-    while (document.querySelector('.new.password-list').hasChildNodes()) {
-      document.querySelector('.new.password-list').firstChild.remove();
-    }
-  }
+//   if (newListArr.length !== 0) {
+//     while (document.querySelector('.new.password-list').hasChildNodes()) {
+//       document.querySelector('.new.password-list').firstChild.remove();
+//     }
+//   }
   
-  newListArr.push(password);
+//   newListArr.push(password);
 
-  const sortedArr = sortByName(newListArr);
+//   const sortedArr = sortByName(newListArr);
 
-  sortedArr.forEach(password => {
-    createListItem(password, '.new.password-list')
-  });
-  document.querySelector('.new-list').style.display = 'block';
-}
-
-const addToLocalStorage = (password) => {
-
-  let passArr = JSON.parse(localStorage.getItem('passwords'));
-  
-  if (passArr) {
-    passArr.push(password);
-  } else {
-    passArr = [];
-    passArr.push(password);
-  }
-
-  localStorage.setItem('passwords', JSON.stringify(passArr));
-}
+//   sortedArr.forEach(password => {
+//     createListItem(password, '.new.password-list')
+//   });
+//   document.querySelector('.new-list').style.display = 'block';
+// }
 
 const displayPassList = () => {
 
@@ -246,11 +256,12 @@ const displayPassList = () => {
       emptyMessage.remove();
     }
 
-    while (document.querySelectorAll('.password-list')[1].hasChildNodes()) {
-      document.querySelectorAll('.password-list')[1].firstChild.remove();
+    while (document.querySelector('.existing.password-list').hasChildNodes()) {
+      document.querySelector('.existing.password-list').firstChild.remove();
     }
     // Sort passwords by passwords name
     passArr = sortByName(passArr);
+    console.log(passArr);
     // Loop through the passwords array and display them as list items
     passArr.forEach(element => {
       createListItem(element, '.existing.password-list');
@@ -275,11 +286,11 @@ const sortByName = (arr) => {
 
 
 // Add event listener to the password generate button
-document.getElementById('createPass').addEventListener('click', () => { displayPassword(passwordArr) });
+document.getElementById('createPass').addEventListener('click', () => { generatePass(passwordArr) });
 document.getElementById('togglePassword').addEventListener('click', togglePassword);
 document.getElementById('copyPassword').addEventListener('click', copy);
 document.getElementById('save').addEventListener('click', savePassword);
-document.querySelector('.star').addEventListener('click', function(e){toggleFavorite(e)});
+// document.querySelector('.star').addEventListener('click', function(e){toggleFavorite(e)});
 
 
 displayPassList();
