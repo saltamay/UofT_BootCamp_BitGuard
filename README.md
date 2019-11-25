@@ -1,6 +1,6 @@
 # UofT SCS Full-Stack Web Development Boot Camp Project #3: Password Generator
 
-[BitGuard](https://saltamay.github.io/bit-guard/)
+[BitGuard](https://saltamay.github.io/UofT_BootCamp_BitGuard/)
 
 Cross-Platform Password Management Solution
 
